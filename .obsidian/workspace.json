@@ -4,8 +4,33 @@
     "type": "split",
     "children": [
       {
+        "id": "07fc42851cb598e1",
+        "type": "tabs",
+        "dimension": 23.95615866388309,
+        "children": [
+          {
+            "id": "dd371e80a22f5ba4",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "knowledge-daily-20260305.md",
+                "followCursor": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "pinned": true,
+              "icon": "lucide-list",
+              "title": "knowledge-daily-20260305 的大纲"
+            }
+          }
+        ]
+      },
+      {
         "id": "e97459a566d3ce0f",
         "type": "tabs",
+        "dimension": 76.04384133611691,
         "children": [
           {
             "id": "d07366ba14e92beb",
@@ -13,15 +38,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "survey/README.md",
+                "file": "daily/rl/rl-papers-daily-2026-03-04.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "README"
+              "title": "rl-papers-daily-2026-03-04"
+            }
+          },
+          {
+            "id": "f86661adbddfb84c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "knowledge-daily-20260305.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "knowledge-daily-20260305"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,9 +134,9 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "survey/README.md",
+                "file": "knowledge-daily-20260305.md",
                 "collapseAll": false,
-                "extraContext": false,
+                "extraContext": true,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
@@ -104,7 +144,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "README 的反向链接列表"
+              "title": "knowledge-daily-20260305 的反向链接列表"
             }
           },
           {
@@ -113,12 +153,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "survey/README.md",
+                "file": "knowledge-daily-20260305.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "README 的出链列表"
+              "title": "knowledge-daily-20260305 的出链列表"
             }
           },
           {
@@ -149,23 +189,9 @@
               "icon": "lucide-archive",
               "title": "添加笔记属性"
             }
-          },
-          {
-            "id": "dd371e80a22f5ba4",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "survey/README.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "README 的大纲"
-            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -182,24 +208,34 @@
       "bases:新建数据库": false
     }
   },
-  "active": "d07366ba14e92beb",
+  "active": "dd371e80a22f5ba4",
   "lastOpenFiles": [
+    "knowledge-daily-20260305.md",
+    "daily/knowledge",
+    "daily/rl/rl-papers-daily-2026-03-04.md",
+    "daily/news",
+    "daily/rl",
+    "invests",
+    "projects",
+    "daily",
+    "survey/06_Memory_Logs/llm-or-report-2026-02.md",
+    "survey/06_Memory_Logs/DiscoRL_PPT.md",
+    "survey/06_Memory_Logs/cv-sota-papers-2026-03-02.md",
+    "survey/06_Memory_Logs/2026-03-04.md",
+    "survey/06_Memory_Logs/2026-03-05.md",
+    "survey/06_Memory_Logs/2026-03-03.md",
+    "survey/06_Memory_Logs/2026-02-25.md",
+    "survey/03_World_Models/world_model_survey_2025_2026_final.md",
+    "survey/03_World_Models/world_model_references_2025_2026.md",
+    "survey/README.md",
     "survey/06_Memory_Logs/2026-03-02.md",
     "survey/06_Memory_Logs/2026-02-28.md",
     "survey/06_Memory_Logs/2026-02-27.md",
-    "survey/06_Memory_Logs/2026-02-25.md",
     "survey/04_Computer_Vision/computer_vision_models.md",
     "survey/02_RLVR_Survey/rlvr_survey_references_2025_2026.md",
     "survey/02_RLVR_Survey/rlvr_survey_2025_2026_final.md",
     "survey/01_RL_Survey/rl_survey_references_2025_2026.md",
     "survey/01_RL_Survey/rl_survey_2025_2026_final.md",
-    "survey/06_Memory_Logs/llm-or-report-2026-02.md",
-    "survey/06_Memory_Logs/rl-papers-daily-2026-03-04.md",
-    "survey/06_Memory_Logs/DiscoRL_PPT.md",
-    "survey/06_Memory_Logs/cv-sota-papers-2026-03-02.md",
-    "survey/06_Memory_Logs/2026-03-05.md",
-    "survey/06_Memory_Logs/2026-03-04.md",
-    "survey/06_Memory_Logs/2026-03-03.md",
     "survey/06_Memory_Logs",
     "survey/05_Other_Reports/llm_rl_README.md",
     "survey/05_Other_Reports/limix_survey.md",
@@ -208,14 +244,6 @@
     "survey/04_Computer_Vision/semantic_segmentation_models.md",
     "survey/04_Computer_Vision/cv_sota_papers_2026_03.md",
     "survey/04_Computer_Vision",
-    "survey/03_World_Models/world_model_survey_2025_2026_final.md",
-    "survey/03_World_Models/world_model_references_2025_2026.md",
-    "survey/03_World_Models",
-    "survey/02_RLVR_Survey",
-    "survey/01_RL_Survey",
-    "survey/README.md",
-    "survey",
-    "未命名",
-    "欢迎.md"
+    "survey/03_World_Models"
   ]
 }
