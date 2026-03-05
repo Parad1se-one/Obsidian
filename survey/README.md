@@ -15,7 +15,8 @@ survey/
 ├── 03_World_Models/                   # World Models 综述 (2025-2026)
 ├── 04_Computer_Vision/                # 计算机视觉论文速递
 ├── 05_Other_Reports/                  # 其他研究报告
-└── 06_Memory_Logs/                    # 每日记忆日志
+├── 06_Memory_Logs/                    # 每日记忆日志
+└── paper-deep-reading/                # 学术论文精读（8 模块框架）
 ```
 
 ---
@@ -72,6 +73,22 @@ survey/
 - 每日调研进展
 - 重要发现记录
 - 配置变更记录
+
+### paper-deep-reading - 学术论文精读
+按照"跨学科教授与顶级期刊审稿人"框架完成的深度阅读报告。
+
+**精读框架**: 8 模块结构化分析（Executive Overview → Method → Results → Limitations → Future Directions）
+
+**目标读者**: 博士阶段研究人员
+
+**输出内容**:
+- 核心问题与贡献评估
+- 方法可落地复述（含伪代码、复杂度）
+- 结果效应大小与鲁棒性分析
+- 批判性审视（有效性威胁、伦理风险）
+- 复现建议与优先级
+
+**使用技能**: `skills/paper-deep-reader/`
 
 ---
 
