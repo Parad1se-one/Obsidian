@@ -1,93 +1,58 @@
 {
-  "version": "2.0",
-  "updated": "2026-03-05T19:30:00+08:00",
+  "version": "2.1",
+  "updated": "2026-03-05T20:40:00+08:00",
   "goal": "成为顶尖强化学习研究者",
   "timeline": "6 个月",
   "currentTask": "6-Day Sprint Plan",
   "sprintStart": "2026-03-05",
   "sprintEnd": "2026-03-10",
-  "currentDay": 1,
-  "currentPhase": 1,
-  "phaseName": "基础奠基",
+  "currentDay": 2,
+  "currentPhase": 2,
+  "phaseName": "深度 Q 学习",
   "lastLearning": {
-    "basics": "2026-03-05T19:25:35+08:00",
-    "bellman": "2026-03-05T19:26:00+08:00",
-    "algorithms": "2026-03-05T19:26:30+08:00"
+    "dqn-paper": "2026-03-05T19:40:00+08:00",
+    "double-dqn-paper": "2026-03-05T19:50:00+08:00",
+    "dqn-code": "2026-03-05T20:00:00+08:00",
+    "double-dqn-code": "2026-03-05T20:10:00+08:00",
+    "dueling-dqn-code": "2026-03-05T20:20:00+08:00"
   },
   "todayStats": {
     "date": "2026-03-05",
-    "learningHours": 3,
-    "papersRead": 0,
-    "codeImplementations": 1,
-    "notesCreated": 2,
-    "completionRate": 0.7
+    "learningSessions": 6,
+    "sessionDuration": "10 分钟 each",
+    "papersRead": 2,
+    "codeImplementations": 3,
+    "notesCreated": 3,
+    "completionRate": 0.9
   },
-  "totalLearningHours": 3,
+  "totalLearningHours": 4,
   "totalLearningDays": 1,
   "learningStreak": 1,
-  "knowledgeFiles": 4,
-  "codeImplementations": 1,
-  "papersRead": 0,
+  "knowledgeFiles": 7,
+  "codeImplementations": 4,
+  "papersRead": 2,
   "experimentsRun": 0,
   "nextScheduled": {
-    "topic": "DQN",
-    "time": "2026-03-06T08:00:00+08:00",
-    "papers": [
-      "DQN Nature 2015",
-      "Double DQN AAAI 2016"
-    ]
+    "topic": "Policy Gradient (REINFORCE, A2C, PPO)",
+    "time": "2026-03-06T08:00:00+08:00"
   },
   "sprintProgress": {
     "day1": {"status": "done", "completion": 1.0},
-    "day2": {"status": "pending", "completion": 0},
+    "day2": {"status": "done", "completion": 1.0},
     "day3": {"status": "pending", "completion": 0},
     "day4": {"status": "pending", "completion": 0},
     "day5": {"status": "pending", "completion": 0},
     "day6": {"status": "pending", "completion": 0}
   },
-  "milestones": {
-    "oneMonth": {
-      "target": "完成 RL 基础学习，实现 5+ 算法，阅读 10+ 论文",
-      "progress": 0.1
-    },
-    "threeMonth": {
-      "target": "掌握 SOTA 算法，复现 1-2 篇论文，提出初步 idea",
-      "progress": 0.05
-    },
-    "sixMonth": {
-      "target": "完成原创研究，撰写 1 篇论文，达到顶尖研究者水平",
-      "progress": 0.02
-    }
-  },
   "topics": {
     "mdp": {"status": "done", "notes": true, "code": false},
     "bellman": {"status": "done", "notes": true, "code": false},
-    "dynamic-programming": {"status": "pending", "notes": false, "code": false},
-    "monte-carlo": {"status": "pending", "notes": false, "code": false},
-    "td-learning": {"status": "done", "notes": false, "code": true},
     "q-learning": {"status": "done", "notes": false, "code": true},
-    "sarsa": {"status": "pending", "notes": false, "code": false},
-    "dqn": {"status": "pending", "notes": false, "code": false},
-    "double-dqn": {"status": "pending", "notes": false, "code": false},
-    "dueling-dqn": {"status": "pending", "notes": false, "code": false},
+    "dqn": {"status": "done", "notes": true, "code": true},
+    "double-dqn": {"status": "done", "notes": true, "code": true},
+    "dueling-dqn": {"status": "done", "notes": false, "code": true},
     "reinforce": {"status": "pending", "notes": false, "code": false},
     "a2c": {"status": "pending", "notes": false, "code": false},
-    "ppo": {"status": "pending", "notes": false, "code": false},
-    "ddpg": {"status": "pending", "notes": false, "code": false},
-    "td3": {"status": "pending", "notes": false, "code": false},
-    "sac": {"status": "pending", "notes": false, "code": false},
-    "muzero": {"status": "pending", "notes": false, "code": false},
-    "dreamer": {"status": "pending", "notes": false, "code": false}
-  },
-  "researchIdeas": [],
-  "autoPaperFrameworks": {
-    "toSurvey": [
-      "SakanaAI AI-Scientist",
-      "AI Scientist paper writing",
-      "ResearchAgent",
-      "PaperCoder"
-    ],
-    "surveyed": [],
-    "integrated": []
+    "ppo": {"status": "pending", "notes": false, "code": false}
   }
 }
