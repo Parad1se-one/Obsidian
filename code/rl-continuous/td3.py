@@ -2,7 +2,7 @@
 TD3 实现 - Twin Delayed DDPG
 改进 DDPG 的三个关键技术
 
-小虾 🦐 | 2026-03-05 21:00
+小虾 🦐 | 2026-03-05 20:54
 """
 
 import torch
@@ -12,22 +12,22 @@ import torch.nn.functional as F
 import numpy as np
 from ddpg import Actor, ReplayBuffer
 
-# ==================== Critic (双网络) ====================
+# ==================== Twin Critic ====================
 
 class TwinCritic(nn.Module):
     """双 Critic 网络 - 解决过估计"""
-    def __init__(self, state_dim, action_dim):
+    def __init__(self, state_dim, action_dim, hidden_dim=256):
         super(TwinCritic, self).__init__()
         
         # Critic 1
-        self.q1_fc1 = nn.Linear(state_dim + action_dim, 256)
-        self.q1_fc2 = nn.Linear(256, 256)
-        self.q1_fc3 = nn.Linear(256, 1)
+        self.q1_fc1 = nn.Linear(state_dim + action_dim, hidden_dim)
+        self.q1_fc2 = nn.Linear(hidden_dim, hidden_dim)
+        self.q1_fc3 = nn.Linear(hidden_dim, 1)
         
         # Critic 2
-        self.q2_fc1 = nn.Linear(state_dim + action_dim, 256)
-        self.q2_fc2 = nn.Linear(256, 256)
-        self.q2_fc3 = nn.Linear(256, 1)
+        self.q2_fc1 = nn.Linear(state_dim + action_dim, hidden_dim)
+        self.q2_fc2 = nn.Linear(hidden_dim, hidden_dim)
+        self.q2_fc3 = nn.Linear(hidden_dim, 1)
     
     def forward(self, state, action):
         x = torch.cat([state, action], dim=1)
@@ -95,7 +95,7 @@ class TD3Agent:
         return action.numpy()[0]
     
     def update(self):
-        """TD3 更新"""
+        """TD3 更新 - 三个关键技术"""
         if len(self.memory) < self.batch_size:
             return
         
@@ -112,13 +112,13 @@ class TD3Agent:
         
         # ==================== Critic 更新 ====================
         with torch.no_grad():
-            # 目标动作 + 噪声平滑
+            # 目标动作 + 噪声平滑 (Target Smoothing)
             next_actions = self.actor_target(next_states)
             noise = torch.randn_like(next_actions) * self.target_noise
             noise = noise.clamp(-self.noise_clip, self.noise_clip)
             next_actions = (next_actions + noise).clamp(-1, 1)
             
-            # 双 Critic 取最小值 (解决过估计)
+            # 双 Critic 取最小值 (Twin Critic)
             q1_next, q2_next = self.critic_target(next_states, next_actions)
             next_q = torch.min(q1_next, q2_next)
             
@@ -132,7 +132,7 @@ class TD3Agent:
         critic_loss.backward()
         self.critic_optimizer.step()
         
-        # ==================== Actor 更新 (延迟) ====================
+        # ==================== Actor 更新 (Delayed) ====================
         if self.total_steps % self.policy_delay == 0:
             actor_actions = self.actor(states)
             actor_q = self.critic.q1(states, actor_actions)
@@ -155,14 +155,17 @@ class TD3Agent:
         self.memory.push(state, action, reward, next_state, done)
 
 
-def train_td3(env, n_episodes=100):
+def train_td3(env_name='Pendulum-v1', n_episodes=100):
     """训练循环"""
+    env = gym.make(env_name)
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
     max_action = float(env.action_space.high[0])
     
     agent = TD3Agent(state_dim, action_dim, max_action)
     rewards_per_episode = []
+    
+    print(f"🦐 开始训练 TD3 ({env_name})...")
     
     for episode in range(n_episodes):
         state = env.reset()
@@ -180,14 +183,19 @@ def train_td3(env, n_episodes=100):
         rewards_per_episode.append(total_reward)
         
         if episode % 10 == 0:
-            avg = np.mean(rewards_per_episode[-10:])
+            last_10 = rewards_per_episode[-10:] if len(rewards_per_episode) >= 10 else rewards_per_episode
+            avg = np.mean(last_10)
             print(f"Episode {episode}, Avg Reward: {avg:.2f}")
     
+    env.close()
     return agent, rewards_per_episode
 
 
 if __name__ == "__main__":
     import gym
-    env = gym.make('Pendulum-v1')
-    agent, rewards = train_td3(env, n_episodes=100)
-    print("✅ TD3 训练完成")
+    # 训练
+    agent, rewards = train_td3('Pendulum-v1', n_episodes=100)
+    
+    # 保存
+    torch.save(agent.actor.state_dict(), 'td3_pendulum.pth')
+    print("💾 模型已保存")

@@ -2,7 +2,7 @@
 SAC 实现 - Soft Actor-Critic
 最大熵强化学习
 
-小虾 🦐 | 2026-03-05 21:10
+小虾 🦐 | 2026-03-05 21:04
 """
 
 import torch
@@ -13,7 +13,7 @@ import numpy as np
 from ddpg import ReplayBuffer
 from math import log, pi
 
-# ==================== 网络架构 ====================
+# ==================== Gaussian Policy ====================
 
 class GaussianPolicy(nn.Module):
     """随机策略 - 输出高斯分布"""
@@ -39,7 +39,7 @@ class GaussianPolicy(nn.Module):
         return mu, log_sigma
     
     def sample(self, state, deterministic=False):
-        """采样动作"""
+        """采样动作 - Reparameterization trick"""
         mu, log_sigma = self.forward(state)
         
         if deterministic:
@@ -59,6 +59,8 @@ class GaussianPolicy(nn.Module):
         
         return action * self.max_action, log_prob
 
+
+# ==================== Soft Q Network ====================
 
 class SoftQNetwork(nn.Module):
     """Soft Q Network"""
@@ -196,14 +198,17 @@ class SACAgent:
         self.memory.push(state, action, reward, next_state, done)
 
 
-def train_sac(env, n_episodes=100):
+def train_sac(env_name='Pendulum-v1', n_episodes=100):
     """训练循环"""
+    env = gym.make(env_name)
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
     max_action = float(env.action_space.high[0])
     
     agent = SACAgent(state_dim, action_dim, max_action)
     rewards_per_episode = []
+    
+    print(f"🦐 开始训练 SAC ({env_name})...")
     
     for episode in range(n_episodes):
         state = env.reset()
@@ -221,14 +226,19 @@ def train_sac(env, n_episodes=100):
         rewards_per_episode.append(total_reward)
         
         if episode % 10 == 0:
-            avg = np.mean(rewards_per_episode[-10:])
+            last_10 = rewards_per_episode[-10:] if len(rewards_per_episode) >= 10 else rewards_per_episode
+            avg = np.mean(last_10)
             print(f"Episode {episode}, Avg Reward: {avg:.2f}")
     
+    env.close()
     return agent, rewards_per_episode
 
 
 if __name__ == "__main__":
     import gym
-    env = gym.make('Pendulum-v1')
-    agent, rewards = train_sac(env, n_episodes=100)
-    print("✅ SAC 训练完成")
+    # 训练
+    agent, rewards = train_sac('Pendulum-v1', n_episodes=100)
+    
+    # 保存
+    torch.save(agent.actor.state_dict(), 'sac_pendulum.pth')
+    print("💾 模型已保存")

@@ -2,7 +2,7 @@
 DDPG 实现 - Deep Deterministic Policy Gradient
 连续控制的基础算法
 
-小虾 🦐 | 2026-03-05 20:50
+小虾 🦐 | 2026-03-05 20:44
 """
 
 import torch
@@ -17,11 +17,11 @@ import random
 
 class Actor(nn.Module):
     """Actor - 输出确定性动作"""
-    def __init__(self, state_dim, action_dim, max_action):
+    def __init__(self, state_dim, action_dim, max_action, hidden_dim=256):
         super(Actor, self).__init__()
-        self.fc1 = nn.Linear(state_dim, 256)
-        self.fc2 = nn.Linear(256, 256)
-        self.fc3 = nn.Linear(256, action_dim)
+        self.fc1 = nn.Linear(state_dim, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc3 = nn.Linear(hidden_dim, action_dim)
         self.max_action = max_action
     
     def forward(self, x):
@@ -33,11 +33,11 @@ class Actor(nn.Module):
 
 class Critic(nn.Module):
     """Critic - 输出 Q 值"""
-    def __init__(self, state_dim, action_dim):
+    def __init__(self, state_dim, action_dim, hidden_dim=256):
         super(Critic, self).__init__()
-        self.fc1 = nn.Linear(state_dim + action_dim, 256)
-        self.fc2 = nn.Linear(256, 256)
-        self.fc3 = nn.Linear(256, 1)
+        self.fc1 = nn.Linear(state_dim + action_dim, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc3 = nn.Linear(hidden_dim, 1)
     
     def forward(self, state, action):
         x = torch.cat([state, action], dim=1)
@@ -166,14 +166,17 @@ class DDPGAgent:
         self.total_steps += 1
 
 
-def train_ddpg(env, n_episodes=100):
+def train_ddpg(env_name='Pendulum-v1', n_episodes=100):
     """训练循环"""
+    env = gym.make(env_name)
     state_dim = env.observation_space.shape[0]
     action_dim = env.action_space.shape[0]
     max_action = float(env.action_space.high[0])
     
     agent = DDPGAgent(state_dim, action_dim, max_action)
     rewards_per_episode = []
+    
+    print(f"🦐 开始训练 DDPG ({env_name})...")
     
     for episode in range(n_episodes):
         state = env.reset()
@@ -191,14 +194,19 @@ def train_ddpg(env, n_episodes=100):
         rewards_per_episode.append(total_reward)
         
         if episode % 10 == 0:
-            avg = np.mean(rewards_per_episode[-10:])
+            last_10 = rewards_per_episode[-10:] if len(rewards_per_episode) >= 10 else rewards_per_episode
+            avg = np.mean(last_10)
             print(f"Episode {episode}, Avg Reward: {avg:.2f}")
     
+    env.close()
     return agent, rewards_per_episode
 
 
 if __name__ == "__main__":
     import gym
-    env = gym.make('Pendulum-v1')
-    agent, rewards = train_ddpg(env, n_episodes=100)
-    print("✅ DDPG 训练完成")
+    # 训练
+    agent, rewards = train_ddpg('Pendulum-v1', n_episodes=100)
+    
+    # 保存
+    torch.save(agent.actor.state_dict(), 'ddpg_pendulum.pth')
+    print("💾 模型已保存")
