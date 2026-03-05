@@ -1,6 +1,6 @@
 # MuZero 论文笔记
 
-**学习时间:** 2026-03-05 21:50-22:00
+**学习时间:** 2026-03-05 21:34-21:44
 **主题:** MuZero (DeepMind, Nature 2019)
 
 ---
@@ -147,38 +147,6 @@ $$h_{t+1}, r_t = \text{dynamics}(h_t, a_t)$$
 
 ---
 
-## 代码要点
-
-```python
-class MuZero:
-    def __init__(self):
-        self.representation = RepNetwork()
-        self.dynamics = DynamicsNetwork()
-        self.prediction = PredictionNetwork()
-    
-    def represent(self, observation):
-        return self.representation(observation)
-    
-    def dynamics(self, hidden_state, action):
-        return self.dynamics(hidden_state, action)
-    
-    def predict(self, hidden_state):
-        return self.prediction(hidden_state)
-    
-    def mcts_search(self, hidden_state):
-        # 在潜空间运行 MCTS
-        pass
-    
-    def train(self, batch):
-        # 计算三种损失
-        loss_rep = ...
-        loss_dyn = ...
-        loss_pred = ...
-        return loss_rep + loss_dyn + loss_pred
-```
-
----
-
 ## 启发
 
 1. **潜空间规划** - 比原始空间更高效
@@ -187,4 +155,4 @@ class MuZero:
 
 ---
 
-*学习时间：2026-03-05 21:50-22:00 | 小虾 🦐*
+*学习时间：2026-03-05 21:34-21:44 | 小虾 🦐*

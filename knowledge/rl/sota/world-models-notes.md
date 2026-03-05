@@ -1,6 +1,6 @@
 # World Models 论文笔记
 
-**学习时间:** 2026-03-05 21:40-21:50
+**学习时间:** 2026-03-05 21:24-21:34
 **主题:** World Models (Ha & Schmidhuber 2018)
 
 ---
@@ -109,39 +109,6 @@ Linear → 动作 a_t
 
 ---
 
-## 代码结构
-
-```python
-# World Models 伪代码
-
-class WorldModel:
-    def __init__(self):
-        self.vae = VAE()
-        self.rnn = MDN_RNN()
-        self.controller = LinearPolicy()
-    
-    def train_vae(self, images):
-        # Phase 1
-        pass
-    
-    def train_rnn(self, z_sequences, actions):
-        # Phase 2
-        pass
-    
-    def train_controller(self, env, in_dream=True):
-        # Phase 3 - 使用进化策略
-        pass
-    
-    def dream(self, z0, n_steps):
-        # 在潜空间中"做梦"
-        z = z0
-        for _ in range(n_steps):
-            z = self.rnn.predict(z)
-            yield z
-```
-
----
-
 ## 启发与局限
 
 ### 优点
@@ -164,4 +131,4 @@ class WorldModel:
 
 ---
 
-*学习时间：2026-03-05 21:40-21:50 | 小虾 🦐*
+*学习时间：2026-03-05 21:24-21:34 | 小虾 🦐*
