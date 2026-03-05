@@ -1,0 +1,63 @@
+{
+  "version": "1.0",
+  "created": "2026-03-05T19:25:00+08:00",
+  "goal": "成为顶尖强化学习研究者",
+  "timeline": "6 个月",
+  "currentPhase": 1,
+  "phaseName": "基础奠基",
+  "lastLearning": {
+    "basics": "2026-03-05T19:25:35+08:00",
+    "bellman": "2026-03-05T19:26:00+08:00",
+    "algorithms": "2026-03-05T19:26:30+08:00",
+    "paper": null,
+    "code": null
+  },
+  "totalLearningHours": 1.5,
+  "totalLearningDays": 1,
+  "learningStreak": 1,
+  "knowledgeFiles": 3,
+  "codeImplementations": 1,
+  "papersRead": 0,
+  "experimentsRun": 0,
+  "nextScheduled": {
+    "topic": "td-learning",
+    "time": "2026-03-06T09:00:00+08:00"
+  },
+  "milestones": {
+    "oneMonth": {
+      "target": "完成 RL 基础学习，实现 5+ 算法，阅读 10+ 论文",
+      "progress": 0.1
+    },
+    "threeMonth": {
+      "target": "掌握 SOTA 算法，复现 1-2 篇论文，提出初步 idea",
+      "progress": 0.05
+    },
+    "sixMonth": {
+      "target": "完成原创研究，撰写 1 篇论文，达到顶尖研究者水平",
+      "progress": 0.02
+    }
+  },
+  "topics": {
+    "mdp": {"status": "done", "notes": true, "code": false},
+    "bellman": {"status": "done", "notes": true, "code": false},
+    "dynamic-programming": {"status": "pending", "notes": false, "code": false},
+    "monte-carlo": {"status": "pending", "notes": false, "code": false},
+    "td-learning": {"status": "pending", "notes": false, "code": false},
+    "q-learning": {"status": "done", "notes": false, "code": true},
+    "sarsa": {"status": "pending", "notes": false, "code": false},
+    "dqn": {"status": "pending", "notes": false, "code": false},
+    "ppo": {"status": "pending", "notes": false, "code": false},
+    "sac": {"status": "pending", "notes": false, "code": false}
+  },
+  "researchIdeas": [],
+  "autoPaperFrameworks": {
+    "toSurvey": [
+      "SakanaAI AI-Scientist",
+      "AI Scientist paper writing",
+      "ResearchAgent",
+      "PaperCoder"
+    ],
+    "surveyed": [],
+    "integrated": []
+  }
+}
