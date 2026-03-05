@@ -1,0 +1,167 @@
+# World Models 论文笔记
+
+**学习时间:** 2026-03-05 21:40-21:50
+**主题:** World Models (Ha & Schmidhuber 2018)
+
+---
+
+## 基本信息
+- **标题:** World Models
+- **作者:** David Ha, Jürgen Schmidhuber
+- **年份:** 2018
+- **链接:** https://worldmodels.github.io/
+
+---
+
+## 核心思想
+
+**Agent 在"梦境"中学习:**
+1. 学习环境的压缩表示 (V 模型)
+2. 学习动态预测 (M 模型)
+3. 在潜空间中训练控制器 (C 模型)
+
+---
+
+## 模型架构
+
+### V Model (Vision) - VAE
+```
+输入：64x64x3 图像
+  ↓
+Encoder → z (潜变量)
+  ↓
+Decoder → 重建图像
+```
+
+**作用:** 压缩视觉输入到低维潜空间
+
+---
+
+### M Model (Memory) - MDN-RNN
+```
+输入：z_t, a_t
+  ↓
+RNN (hidden state h_t)
+  ↓
+输出：z_{t+1} 的概率分布 (高斯混合)
+```
+
+**作用:** 预测下一状态的潜变量
+
+---
+
+### C Model (Controller) - Linear Policy
+```
+输入：[z_t, h_t]
+  ↓
+Linear → 动作 a_t
+```
+
+**作用:** 基于潜状态输出动作
+
+---
+
+## 训练流程
+
+### Phase 1: 训练 VAE
+- 收集随机策略的图像数据
+- 训练 VAE 压缩图像到潜空间 z
+
+### Phase 2: 训练 MDN-RNN
+- 使用 VAE 编码的 z 序列
+- 训练 RNN 预测 z_{t+1}
+
+### Phase 3: 训练 Controller
+- **在真实环境或"梦境"中**
+- 使用进化策略 (CMA-ES)
+- 最大化累积奖励
+
+---
+
+## 关键创新
+
+### 1. 潜空间学习
+- 在高维像素空间学习困难
+- 压缩到低维潜空间更高效
+
+### 2. 梦境训练
+- 在 M 模型生成的"梦境"中训练 C
+- 样本效率极高
+- 可以"想象"未见过的情况
+
+### 3. 温度参数
+- 控制 M 模型的"创造力"
+- 温度高 → 更多变化/不确定性
+- 温度低 → 更保守/确定性
+
+---
+
+## 实验结果
+
+### CarRacing
+- 仅用少量真实交互
+- 在梦境中训练
+- 达到 SOTA 水平
+
+### VizDoom (Take Cover)
+- 学习躲避火球
+- 在梦境中训练有效
+
+---
+
+## 代码结构
+
+```python
+# World Models 伪代码
+
+class WorldModel:
+    def __init__(self):
+        self.vae = VAE()
+        self.rnn = MDN_RNN()
+        self.controller = LinearPolicy()
+    
+    def train_vae(self, images):
+        # Phase 1
+        pass
+    
+    def train_rnn(self, z_sequences, actions):
+        # Phase 2
+        pass
+    
+    def train_controller(self, env, in_dream=True):
+        # Phase 3 - 使用进化策略
+        pass
+    
+    def dream(self, z0, n_steps):
+        # 在潜空间中"做梦"
+        z = z0
+        for _ in range(n_steps):
+            z = self.rnn.predict(z)
+            yield z
+```
+
+---
+
+## 启发与局限
+
+### 优点
+- ✅ 样本效率高
+- ✅ 可以在"梦境"中安全训练
+- ✅ 框架通用
+
+### 局限
+- ❌ 模型误差累积
+- ❌ 长序列预测困难
+- ❌ 复杂环境建模困难
+
+---
+
+## 后续工作
+
+- **MuZero (2019):** 结合 MCTS，无需已知规则
+- **Dreamer (2020):** 端到端训练，更稳定
+- **DreamerV2/V3 (2021/2023):** 改进版，SOTA
+
+---
+
+*学习时间：2026-03-05 21:40-21:50 | 小虾 🦐*
