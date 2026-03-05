@@ -2,7 +2,7 @@
 PPO 实现 - Proximal Policy Optimization
 当前主流的策略梯度算法
 
-小虾 🦐 | 2026-03-05 20:20
+小虾 🦐 | 2026-03-05 20:24
 """
 
 import torch
@@ -11,18 +11,17 @@ import torch.optim as optim
 import torch.nn.functional as F
 import numpy as np
 import gym
-from collections import deque
 
-# ==================== 网络架构 ====================
+# ==================== Actor-Critic 网络 ====================
 
 class ActorCritic(nn.Module):
     """Actor-Critic 网络 (PPO)"""
-    def __init__(self, state_dim, n_actions):
+    def __init__(self, state_dim, n_actions, hidden_dim=128):
         super(ActorCritic, self).__init__()
         
-        self.shared = nn.Linear(state_dim, 128)
-        self.actor = nn.Linear(128, n_actions)
-        self.critic = nn.Linear(128, 1)
+        self.shared = nn.Linear(state_dim, hidden_dim)
+        self.actor = nn.Linear(hidden_dim, n_actions)
+        self.critic = nn.Linear(hidden_dim, 1)
         self.relu = nn.ReLU()
     
     def forward(self, x):
@@ -93,7 +92,8 @@ class PPOAgent:
             advantages.insert(0, advantage)
         
         advantages = torch.FloatTensor(advantages)
-        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        if len(advantages) > 1:
+            advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
         
         return advantages
     
@@ -169,27 +169,58 @@ class PPOAgent:
         return total_reward, loss, actor_loss, critic_loss
 
 
-def train_ppo(env, n_iterations=500, batch_size=2048):
+def train_ppo(env_name='CartPole-v1', n_iterations=500, batch_size=2048):
     """训练循环"""
-    agent = PPOAgent(state_dim=4, n_actions=2)
+    env = gym.make(env_name)
+    state_dim = env.observation_space.shape[0]
+    n_actions = env.action_space.n
+    
+    agent = PPOAgent(state_dim, n_actions)
     rewards_per_iteration = []
+    
+    print(f"🦐 开始训练 PPO ({env_name})...")
     
     for iteration in range(n_iterations):
         reward, loss, actor_loss, critic_loss = agent.train_batch(env, batch_size)
         rewards_per_iteration.append(reward)
         
         if iteration % 10 == 0:
-            avg = np.mean(rewards_per_iteration[-10:])
+            last_10 = rewards_per_iteration[-10:] if len(rewards_per_iteration) >= 10 else rewards_per_iteration
+            avg = np.mean(last_10)
             print(f"Iteration {iteration}, Avg Reward: {avg:.2f}, "
                   f"Loss: {loss:.4f}, Actor: {actor_loss:.4f}, Critic: {critic_loss:.4f}")
+        
+        # 提前结束
+        if len(rewards_per_iteration) >= 50:
+            last_50 = np.mean(rewards_per_iteration[-50:])
+            if last_50 >= 450:
+                print(f"✅ 训练完成！Iteration {iteration}, Avg Reward: {last_50:.2f}")
+                break
     
+    env.close()
     return agent, rewards_per_iteration
 
 
 if __name__ == "__main__":
-    env = gym.make('CartPole-v1')
-    agent, rewards = train_ppo(env, n_iterations=100)
-    print("✅ PPO 训练完成")
+    # 训练
+    agent, rewards = train_ppo('CartPole-v1', n_iterations=100)
     
+    # 保存
     torch.save(agent.model.state_dict(), 'ppo_cartpole.pth')
     print("💾 模型已保存")
+    
+    # 测试
+    print("\n🎮 测试训练好的模型...")
+    env = gym.make('CartPole-v1')
+    state = env.reset()
+    total_reward = 0
+    done = False
+    
+    while not done:
+        action, _, _ = agent.select_action(state)
+        env.render()
+        state, reward, done, _ = env.step(action)
+        total_reward += reward
+    
+    print(f"测试奖励：{total_reward}")
+    env.close()

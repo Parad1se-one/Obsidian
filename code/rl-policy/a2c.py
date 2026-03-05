@@ -1,8 +1,8 @@
 """
 A2C 实现 - Advantage Actor-Critic
-结合 REINFORCE 和基线降低方差
+结合策略梯度和值函数基线
 
-小虾 🦐 | 2026-03-05 20:10
+小虾 🦐 | 2026-03-05 20:14
 """
 
 import torch
@@ -12,21 +12,21 @@ import torch.nn.functional as F
 import numpy as np
 import gym
 
-# ==================== 网络架构 ====================
+# ==================== Actor-Critic 网络 ====================
 
 class ActorCritic(nn.Module):
     """Actor-Critic 网络 - 共享特征"""
-    def __init__(self, state_dim, n_actions):
+    def __init__(self, state_dim, n_actions, hidden_dim=128):
         super(ActorCritic, self).__init__()
         
         # 共享特征层
-        self.shared = nn.Linear(state_dim, 128)
+        self.shared = nn.Linear(state_dim, hidden_dim)
         
         # Actor - 输出动作概率
-        self.actor = nn.Linear(128, n_actions)
+        self.actor = nn.Linear(hidden_dim, n_actions)
         
         # Critic - 输出状态值
-        self.critic = nn.Linear(128, 1)
+        self.critic = nn.Linear(hidden_dim, 1)
         
         self.relu = nn.ReLU()
     
@@ -94,7 +94,8 @@ class A2CAgent:
         advantages = torch.FloatTensor(advantages)
         
         # 标准化
-        advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+        if len(advantages) > 1:
+            advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
         
         return advantages
     
@@ -138,7 +139,7 @@ class A2CAgent:
         
         return loss.item(), actor_loss.item(), critic_loss.item()
     
-    def train_step(self, env, n_steps=5):
+    def train_n_steps(self, env, n_steps=5):
         """训练 n 步"""
         states, actions, log_probs, rewards, values, dones = [], [], [], [], [], []
         
@@ -172,28 +173,58 @@ class A2CAgent:
         return total_reward, 0, 0, 0
 
 
-def train_a2c(env, n_episodes=1000, n_steps=5):
+def train_a2c(env_name='CartPole-v1', n_episodes=1000, n_steps=5):
     """训练循环"""
-    agent = A2CAgent(state_dim=4, n_actions=2)  # CartPole
+    env = gym.make(env_name)
+    state_dim = env.observation_space.shape[0]
+    n_actions = env.action_space.n
+    
+    agent = A2CAgent(state_dim, n_actions)
     rewards_per_episode = []
     
+    print(f"🦐 开始训练 A2C ({env_name})...")
+    
     for episode in range(n_episodes):
-        reward, loss, actor_loss, critic_loss = agent.train_step(env, n_steps)
+        reward, loss, actor_loss, critic_loss = agent.train_n_steps(env, n_steps)
         rewards_per_episode.append(reward)
         
         if episode % 50 == 0:
-            avg = np.mean(rewards_per_episode[-50:])
+            last_50 = rewards_per_episode[-50:] if len(rewards_per_episode) >= 50 else rewards_per_episode
+            avg = np.mean(last_50)
             print(f"Episode {episode}, Avg Reward: {avg:.2f}, "
                   f"Loss: {loss:.4f}, Actor: {actor_loss:.4f}, Critic: {critic_loss:.4f}")
+        
+        # 提前结束
+        if len(rewards_per_episode) >= 100:
+            last_100 = np.mean(rewards_per_episode[-100:])
+            if last_100 >= 450:
+                print(f"✅ 训练完成！Episode {episode}, Avg Reward: {last_100:.2f}")
+                break
     
+    env.close()
     return agent, rewards_per_episode
 
 
 if __name__ == "__main__":
-    env = gym.make('CartPole-v1')
-    agent, rewards = train_a2c(env, n_episodes=500)
-    print("✅ A2C 训练完成")
+    # 训练
+    agent, rewards = train_a2c('CartPole-v1', n_episodes=500)
     
     # 保存
     torch.save(agent.model.state_dict(), 'a2c_cartpole.pth')
     print("💾 模型已保存")
+    
+    # 测试
+    print("\n🎮 测试训练好的模型...")
+    env = gym.make('CartPole-v1')
+    state = env.reset()
+    total_reward = 0
+    done = False
+    
+    while not done:
+        action, _, _ = agent.select_action(state)
+        env.render()
+        state, reward, done, _ = env.step(action)
+        total_reward += reward
+    
+    print(f"测试奖励：{total_reward}")
+    env.close()
