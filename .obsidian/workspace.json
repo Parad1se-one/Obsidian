@@ -6,7 +6,7 @@
       {
         "id": "07fc42851cb598e1",
         "type": "tabs",
-        "dimension": 23.95615866388309,
+        "dimension": 23.956158663883095,
         "children": [
           {
             "id": "dd371e80a22f5ba4",
@@ -15,7 +15,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "knowledge-daily-20260305.md",
+                "file": "daily/knowledge/knowledge-daily-20260305.md",
                 "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
@@ -52,7 +52,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "knowledge-daily-20260305.md",
+                "file": "daily/knowledge/knowledge-daily-20260305.md",
                 "mode": "preview",
                 "source": false
               },
@@ -208,9 +208,9 @@
       "bases:新建数据库": false
     }
   },
-  "active": "dd371e80a22f5ba4",
+  "active": "e2a0b503bce5f58b",
   "lastOpenFiles": [
-    "knowledge-daily-20260305.md",
+    "daily/knowledge/knowledge-daily-20260305.md",
     "daily/knowledge",
     "daily/rl/rl-papers-daily-2026-03-04.md",
     "daily/news",
