@@ -1,0 +1,36 @@
+{
+  "news_sources": {
+    "newsapi": {
+      "enabled": true,
+      "endpoint": "https://newsapi.org/v2/top-headlines",
+      "categories": ["business", "technology"],
+      "country": "cn",
+      "language": "zh"
+    },
+    "finlight": {
+      "enabled": false,
+      "endpoint": "https://api.finlight.me/v2/articles",
+      "query": "ticker:SPY OR ticker:QQQ OR 央行 OR 美联储"
+    }
+  },
+  "output": {
+    "format": "markdown",
+    "directory": "/home/openclaw/.openclaw/workspace/obsidian-repo/daily/financial-news",
+    "filename_pattern": "{date}.md"
+  },
+  "schedule": {
+    "timezone": "Asia/Shanghai",
+    "time": "07:30",
+    "days": ["mon", "tue", "wed", "thu", "fri"]
+  },
+  "推送": {
+    "feishu": {
+      "enabled": false,
+      "chat_id": ""
+    },
+    "email": {
+      "enabled": false,
+      "recipients": []
+    }
+  }
+}

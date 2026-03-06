@@ -1,0 +1,86 @@
+
+============================================================
+🚀 CARTPOLE DQN KNOWLEDGE DISTILLATION
+============================================================
+Environment: CartPole-v1
+Teacher Episodes: 500
+Distillation Episodes: 50
+Temperature: 2.0, Alpha: 0.7
+Timestamp: 2026-03-06 08:54:03
+
+📋 Environment Info:
+  State Dimension: 4
+  Action Dimension: 2
+
+============================================================
+🏫 PHASE 1: TRAINING TEACHER NETWORK
+============================================================
+  Episode 50/500 - Avg Reward (last 50): 25.04, Epsilon: 0.010
+  Episode 100/500 - Avg Reward (last 50): 91.82, Epsilon: 0.010
+  Episode 150/500 - Avg Reward (last 50): 141.02, Epsilon: 0.010
+  Episode 200/500 - Avg Reward (last 50): 112.28, Epsilon: 0.010
+  Episode 250/500 - Avg Reward (last 50): 137.88, Epsilon: 0.010
+  Episode 300/500 - Avg Reward (last 50): 153.08, Epsilon: 0.010
+  Episode 350/500 - Avg Reward (last 50): 127.88, Epsilon: 0.010
+  Episode 400/500 - Avg Reward (last 50): 119.92, Epsilon: 0.010
+  Episode 450/500 - Avg Reward (last 50): 166.16, Epsilon: 0.010
+  Episode 500/500 - Avg Reward (last 50): 188.32, Epsilon: 0.010
+
+✅ Teacher training complete. Best episode: 500.0
+
+============================================================
+🎓 PHASE 2: KNOWLEDGE DISTILLATION
+============================================================
+
+📚 Collecting teacher knowledge (50 episodes)...
+  Episode 10/50, Total steps: 194
+  Episode 20/50, Total steps: 385
+  Episode 30/50, Total steps: 568
+  Episode 40/50, Total steps: 760
+  Episode 50/50, Total steps: 946
+✅ Collected 946 samples from teacher
+
+🎓 Training student network (200 epochs)...
+   Temperature: 2.0, Alpha: 0.7
+  Epoch 20/200 - Loss: 0.4554 (Distill: 0.2727, Hard: 0.6567)
+  Epoch 40/200 - Loss: 0.4195 (Distill: 0.2862, Hard: 0.5886)
+  Epoch 60/200 - Loss: 0.4026 (Distill: 0.2961, Hard: 0.6560)
+  Epoch 80/200 - Loss: 0.3853 (Distill: 0.2128, Hard: 0.6242)
+  Epoch 100/200 - Loss: 0.3480 (Distill: 0.2415, Hard: 0.5934)
+  Epoch 120/200 - Loss: 0.3035 (Distill: 0.1544, Hard: 0.5640)
+  Epoch 140/200 - Loss: 0.2904 (Distill: 0.2097, Hard: 0.4629)
+  Epoch 160/200 - Loss: 0.2783 (Distill: 0.2312, Hard: 0.4752)
+  Epoch 180/200 - Loss: 0.2627 (Distill: 0.2256, Hard: 0.4225)
+  Epoch 200/200 - Loss: 0.2491 (Distill: 0.1420, Hard: 0.4350)
+✅ Student training complete. Final avg loss: 0.2427
+
+============================================================
+📈 PHASE 3: EVALUATION
+============================================================
+
+============================================================
+📊 MODEL COMPARISON
+============================================================
+
+Evaluating Teacher Network...
+  Mean Reward: 19.45 ± 2.33
+  Range: [15.0, 25.0]
+
+Evaluating Student Network...
+  Mean Reward: 67.45 ± 33.15
+  Range: [13.0, 100.0]
+
+📈 Student Performance Retention: 346.8% of teacher
+
+💾 Model Size Comparison:
+  Teacher: 101,506 parameters
+  Student: 4,610 parameters (95.5% reduction)
+
+💾 Save trained models? (y/n): Traceback (most recent call last):
+  File "/home/openclaw/.openclaw/workspace/code/rl-distillation/cartpole-distill.py", line 539, in <module>
+    main()
+    ~~~~^^
+  File "/home/openclaw/.openclaw/workspace/code/rl-distillation/cartpole-distill.py", line 518, in main
+    save_models = input("\n💾 Save trained models? (y/n): ").strip().lower()
+                  ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+EOFError: EOF when reading a line
