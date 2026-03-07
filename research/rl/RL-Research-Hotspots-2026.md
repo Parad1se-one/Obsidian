@@ -2,7 +2,8 @@
 
 > 📅 生成时间：2026-03-07  
 > 📚 研究周期：2025 Q4 - 2026 Q1  
-> 🔍 数据来源：arXiv, NeurIPS, ICML, ICLR, GitHub, Papers With Code
+> 🔍 数据来源：arXiv, NeurIPS, ICML, ICLR, GitHub, Papers With Code  
+> 🔄 最后更新：2026-03-07 13:45 (补充 16+ 篇 arXiv 论文)
 
 ---
 
@@ -363,6 +364,33 @@
 
 ---
 
+## 附录 B：新增收录论文 (2026-03-07 更新)
+
+### 联邦学习与分布式 RL
+
+| arXiv ID | 标题 | 核心贡献 |
+|---------|------|---------|
+| 2603.05158 | Balancing Privacy-Quality-Efficiency in Federated Learning | Alt-FL 框架：DP+HE+ 合成数据轮次交错策略 |
+| 2603.05116 | FedBCD: Communication-Efficient Accelerated Block Coordinate Gradient Descent | 参数块通信，复杂度降低 N 倍 |
+
+### RL 应用与交叉领域
+
+| arXiv ID | 标题 | 应用领域 |
+|---------|------|---------|
+| 2603.05031 | Behavioral Anomaly Detection for AI Agent UI Protocols | AI 安全：UI 协议异常检测 (Random Forest F1=0.843) |
+| 2603.04920 | Knowledge-informed Bidding with Dual-process Control | 在线广告：KBD 双过程竞价 (PID+Decision Transformer) |
+| 2603.04878 | Structure Observation Driven Image-Text Contrastive Learning | 医疗 AI:CT 报告生成 (IPMI 2025) |
+
+### 机器学习基础
+
+| arXiv ID | 标题 | 方向 |
+|---------|------|------|
+| 2603.05067 | Synchronization-based clustering on the unit hypersphere | 聚类：Kuramoto 模型 |
+| 2603.05395 | On the Necessity of Learnable Sheaf Laplacians | 图学习 |
+| 2603.05375 | Robust Node Affinities via Jaccard-Biased Random Walks | 图学习 |
+
+---
+
 *报告生成：小虾 (Xiao Xia) RL 研究助手*  
-*最后更新：2026-03-07*  
-*Git Commit: pending*
+*最后更新：2026-03-07 13:45*  
+*Git Commit: 待推送*
