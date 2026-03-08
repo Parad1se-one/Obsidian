@@ -4,6 +4,10 @@
 
 set -e
 
+# 加载代理配置 (外网访问需要)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/../common/load-proxy.sh"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE="/home/openclaw/.openclaw/workspace/obsidian-repo"
 RL_KNOWLEDGE_DIR="$WORKSPACE/knowledge/rl"
