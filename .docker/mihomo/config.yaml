@@ -1,0 +1,42 @@
+# Mihomo 配置模板
+# 请在此文件中配置你的订阅或节点
+
+# 订阅配置 (二选一)
+# 方式 1: 直接填写订阅 URL (不推荐，日志会暴露)
+# external-controller: 0.0.0.0:9090
+# profile:
+#   store-selected: true
+#   store-fake-ip: true
+
+# 方式 2: 手动配置节点 (推荐)
+proxies:
+  # 示例节点，请替换为你的实际节点
+  # - name: "Example Node"
+  #   type: vmess
+  #   server: example.com
+  #   port: 443
+  #   uuid: your-uuid
+  #   alterId: 0
+  #   cipher: auto
+  #   tls: true
+
+proxy-groups:
+  - name: "PROXY"
+    type: select
+    proxies:
+      - DIRECT
+      # - 你的节点名称
+
+rules:
+  - DOMAIN-SUFFIX,google.com,PROXY
+  - DOMAIN-SUFFIX,github.com,PROXY
+  - DOMAIN,api.openai.com,PROXY
+  - GEOIP,CN,DIRECT
+  - MATCH,DIRECT
+
+# 其他配置
+external-controller: 0.0.0.0:9090
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false

@@ -46,13 +46,16 @@ setup_dirs() {
 # 拉取 mihomo 镜像
 pull_image() {
     log "拉取 mihomo 镜像..."
-    # 使用官方镜像或社区镜像
-    docker pull ghcr.io/metacubex/mihomo:latest || \
-    docker pull dreamacro/mihomo:latest || \
-    {
-        warn "官方镜像拉取失败，使用备用方案..."
-        # 备用：使用 alpine 手动安装
-        docker pull alpine:latest
+    # 使用国内镜像源
+    if sudo docker pull docker.1panel.live/metacubex/mihomo:latest 2>/dev/null; then
+        log "✅ 镜像拉取成功：docker.1panel.live/metacubex/mihomo"
+        return 0
+    elif sudo docker pull ghcr.io/metacubex/mihomo:latest 2>/dev/null; then
+        log "✅ 镜像拉取成功：ghcr.io/metacubex/mihomo"
+        return 0
+    else
+        warn "所有镜像源拉取失败"
+        return 1
     fi
 }
 
@@ -110,7 +113,7 @@ EOF
 start_container() {
     log "启动 mihomo 容器..."
     
-    docker run -d \
+    sudo docker run -d \
         --name "$CONTAINER_NAME" \
         --restart unless-stopped \
         --cap-add=NET_ADMIN \
@@ -120,18 +123,7 @@ start_container() {
         -p 9090:9090 \
         -p 7890:7890 \
         -e TZ="Asia/Shanghai" \
-        ghcr.io/metacubex/mihomo:latest 2>/dev/null || \
-    docker run -d \
-        --name "$CONTAINER_NAME" \
-        --restart unless-stopped \
-        --cap-add=NET_ADMIN \
-        --network=bridge \
-        -v "$MIHOMO_CONFIG:/root/.config/mihomo/config.yaml:ro" \
-        -v "$WORKSPACE/.docker/mihomo/data:/root/.config/mihomo/data" \
-        -p 9090:9090 \
-        -p 7890:7890 \
-        -e TZ="Asia/Shanghai" \
-        dreamacro/mihomo:latest 2>/dev/null || \
+        docker.1panel.live/metacubex/mihomo:latest 2>/dev/null || \
     {
         error "镜像启动失败，请检查 Docker 和镜像"
         exit 1
@@ -143,7 +135,7 @@ start_container() {
 # 检查容器状态
 check_status() {
     log "检查容器状态..."
-    docker ps --filter "name=$CONTAINER_NAME" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+    sudo docker ps --filter "name=$CONTAINER_NAME" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
     
     # 检查 mihomo API
     sleep 3
@@ -158,7 +150,7 @@ check_status() {
 run_in_container() {
     local cmd="$1"
     log "在容器内执行：$cmd"
-    docker exec "$CONTAINER_NAME" sh -c "$cmd"
+    sudo docker exec "$CONTAINER_NAME" sh -c "$cmd"
 }
 
 # 通过代理运行命令 (宿主机)
@@ -178,8 +170,8 @@ run_with_proxy() {
 # 停止容器
 stop_container() {
     log "停止容器..."
-    docker stop "$CONTAINER_NAME" 2>/dev/null || true
-    docker rm "$CONTAINER_NAME" 2>/dev/null || true
+    sudo docker stop "$CONTAINER_NAME" 2>/dev/null || true
+    sudo docker rm "$CONTAINER_NAME" 2>/dev/null || true
     log "容器已停止"
 }
 
@@ -223,7 +215,7 @@ main() {
             check_status
             ;;
         start)
-            docker start "$CONTAINER_NAME" 2>/dev/null || start_container
+            sudo docker start "$CONTAINER_NAME" 2>/dev/null || start_container
             ;;
         stop)
             stop_container
@@ -241,10 +233,10 @@ main() {
             ;;
         config)
             ${EDITOR:-nano} "$MIHOMO_CONFIG"
-            docker restart "$CONTAINER_NAME" 2>/dev/null
+            sudo docker restart "$CONTAINER_NAME" 2>/dev/null
             ;;
         logs)
-            docker logs -f "$CONTAINER_NAME"
+            sudo docker logs -f "$CONTAINER_NAME"
             ;;
         help|--help|-h)
             show_help
