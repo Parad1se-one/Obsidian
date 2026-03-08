@@ -1,19 +1,18 @@
-use_default_settings: true
+general:
+  debug: false
+  instance_name: "SearXNG"
+
+search:
+  safe_search: 0
+  default_lang: "zh-CN"
+
 server:
   secret_key: "searxng-secret-key-2026"
   limiter: false
   image_proxy: true
-  max_request_timeout: 10
   bind_address: "127.0.0.1"
-search:
-  safe_search: 0
-  autocomplete: "google"
-  default_lang: "zh-CN"
-  formats:
-    - html
-    - json
+
 outgoing:
   request_timeout: 5.0
   max_request_timeout: 15.0
   proxy: "http://127.0.0.1:7890"
-  enable_http2: false
