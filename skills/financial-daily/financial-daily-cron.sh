@@ -37,7 +37,7 @@ log "🦐 财经日报自动推送 | $DATE | 周${DAY_OF_WEEK}"
 log "=========================================="
 
 # 1. 生成财经日报
-log "📊 步骤 1/3: 生成财经日报..."
+log "📊 步骤 1/4: 生成财经日报..."
 cd "$WORKSPACE" && ./skills/financial-daily/financial-daily.sh "$DATE" 2>&1 | tee -a "$LOG_FILE"
 
 if [ ! -f "$OUTPUT_FILE" ]; then
@@ -47,7 +47,7 @@ fi
 log "✅ 财经日报生成完成：$OUTPUT_FILE"
 
 # 2. 质量检查
-log "📋 步骤 2/3: 质量检查..."
+log "📋 步骤 2/4: 质量检查..."
 QUALITY_OUTPUT=$(cd "$WORKSPACE" && ./skills/quality-checker/quality-checker.sh "$OUTPUT_FILE" "financial" 2>&1)
 echo "$QUALITY_OUTPUT" | tee -a "$LOG_FILE"
 
@@ -75,8 +75,29 @@ if [ "$QUALITY_SCORE" -lt 80 ]; then
 fi
 log "✅ 质量检查通过"
 
-# 3. 推送飞书
-log "📤 步骤 3/3: 推送飞书..."
+# 3. Git 提交并推送
+log "📤 步骤 3/4: Git 提交并推送..."
+cd "$WORKSPACE/obsidian-repo"
+
+# 添加今日日报文件 (使用相对路径)
+RELATIVE_FILE="daily/financial-news/${DATE}.md"
+git add "$RELATIVE_FILE" 2>&1 | tee -a "$LOG_FILE"
+
+# 提交
+git commit -m "📈 财经日报 $DATE [auto]" 2>&1 | tee -a "$LOG_FILE"
+
+# 推送
+git push 2>&1 | tee -a "$LOG_FILE"
+
+PUSH_RESULT=${PIPESTATUS[2]}
+if [ "$PUSH_RESULT" -eq 0 ]; then
+    log "✅ Git 推送成功"
+else
+    log "⚠️  Git 推送失败 (exit code: $PUSH_RESULT)，继续尝试飞书推送"
+fi
+
+# 4. 推送飞书
+log "📤 步骤 4/4: 推送飞书..."
 
 # 提取日报摘要（前 50 行）
 SUMMARY=$(head -50 "$OUTPUT_FILE" | tail -40)
@@ -113,5 +134,5 @@ else
 fi
 
 log "=========================================="
-log "✅ 财经日报推送流程完成"
+log "✅ 财经日报生成 + Git 推送 + 飞书通知 完成"
 log "=========================================="
