@@ -92,6 +92,12 @@
 
 ## 🤖 自动执行机制 (2026-03-08 新增)
 
+### OpenViking 记忆同步
+**脚本:** `skills/openviking/openviking-sync.sh`
+**触发:** 每小时 heartbeat 检查时自动同步
+**日志:** `logs/openviking-sync.log`
+
+### Heartbeat 任务执行
 **配置脚本:** `skills/heartbeat/setup-heartbeat-cron.sh`
 
 **执行逻辑:**

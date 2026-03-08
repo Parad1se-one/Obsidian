@@ -1,0 +1,40 @@
+{
+  "workspace": "/home/openclaw/.openclaw/workspace",
+  "storage": {
+    "agfs": {
+      "path": "/home/openclaw/.openclaw/workspace/.openviking/data"
+    },
+    "vectordb": {
+      "path": "/home/openclaw/.openclaw/workspace/.openviking/data"
+    }
+  },
+  "models": {
+    "vlm": {
+      "provider": "litellm",
+      "model": "vllm/Qwen/Qwen3.5-397B-A17B-FP8",
+      "api_base": "http://localhost:8000/v1",
+      "max_tokens": 4096
+    },
+    "embedding": {
+      "provider": "litellm",
+      "model": "vllm/text-embedding-3-small",
+      "api_base": "http://localhost:8000/v1",
+      "dimensions": 1536
+    }
+  },
+  "memory": {
+    "auto_compress": true,
+    "compress_threshold": 10,
+    "retention_days": 90,
+    "categories": ["preference", "project", "decision", "fact", "task", "contact"]
+  },
+  "retrieval": {
+    "top_k": 5,
+    "score_threshold": 0.7,
+    "hybrid_search": true
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "/home/openclaw/.openclaw/workspace/logs/openviking.log"
+  }
+}
