@@ -70,13 +70,22 @@ def search(query: str, count: int = 10, timeout: int = DEFAULT_TIMEOUT) -> List[
     
     html = response.text
     
-    # 解析搜索结果
+    # 解析搜索结果 (Whoogle 格式)
     results = []
-    title_pattern = r'class="result__a"[^>]*href="([^"]+)"[^>]*>([^<]+)'
+    title_pattern = r'<a[^>]*href="([^"]+)"[^>]*>([^<]+)'
+    seen = set()
     
     for match in re.finditer(title_pattern, html):
-        url = unescape(match.group(1))
-        title = unescape(match.group(2))
+        url = unescape(match.group(1).replace('&amp;', '&'))
+        title = unescape(re.sub(r'<[^>]+>', '', match.group(2)))
+        
+        # 过滤无效结果
+        if not url.startswith('http') or 'google.com/maps' in url:
+            continue
+        if url in seen:
+            continue
+        
+        seen.add(url)
         results.append({'title': title, 'url': url})
         
         if len(results) >= count:

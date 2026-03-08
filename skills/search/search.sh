@@ -99,20 +99,29 @@ from html import unescape
 
 html = sys.stdin.read()
 
-# 提取搜索结果
-title_pattern = r'class=\"result__a\"[^>]*href=\"([^\"]+)\"[^>]*>([^<]+)'
-desc_pattern = r'class=\"result__snippet\"[^>]*>([^<]+)'
+# 提取搜索结果 (Whoogle 格式)
+# <a data-ved=\"...\" href=\"https://...\">Title</a>
+title_pattern = r'<a[^>]*href=\"([^\"]+)\"[^>]*>([^<]+)'
 
 print('=' * 60)
 print(f'搜索结果')
 print('=' * 60)
 
+seen = set()
 i = 0
 for match in re.finditer(title_pattern, html):
     if i >= $count:
         break
-    url = unescape(match.group(1))
-    title = unescape(match.group(2))
+    url = unescape(match.group(1).replace('&amp;', '&'))
+    title = unescape(re.sub(r'<[^>]+>', '', match.group(2)))
+    
+    # 过滤无效结果
+    if not url.startswith('http') or 'google.com/maps' in url:
+        continue
+    if url in seen:
+        continue
+    
+    seen.add(url)
     i += 1
     print(f'\n{i}. {title}')
     print(f'   {url}')
