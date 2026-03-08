@@ -8,6 +8,9 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../common/load-proxy.sh"
 
+# 加载搜索工具
+SEARCH_SCRIPT="$SCRIPT_DIR/../search/search.sh"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE="/home/openclaw/.openclaw/workspace/obsidian-repo"
 RL_KNOWLEDGE_DIR="$WORKSPACE/knowledge/rl"
@@ -314,6 +317,22 @@ QLEARN
         
     paper)
         echo "📖 开始论文阅读..."
+        echo ""
+        
+        # 使用搜索工具查找最新论文
+        echo "🔍 搜索 RL 前沿论文..."
+        SEARCH_QUERY="reinforcement learning 2025 2026 paper arxiv"
+        if [ -x "$SEARCH_SCRIPT" ]; then
+            PAPERS=$("$SEARCH_SCRIPT" --urls "$SEARCH_QUERY" 10 2>/dev/null || echo "")
+            if [ -n "$PAPERS" ]; then
+                echo "✅ 找到相关论文链接"
+                echo "$PAPERS" | head -5 | while read url; do
+                    echo "   - $url"
+                done
+            fi
+        else
+            echo "⚠️  搜索工具不可用，使用预设查询"
+        fi
         echo ""
         
         # 创建论文阅读模板
