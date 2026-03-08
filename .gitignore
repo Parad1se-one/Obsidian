@@ -1,0 +1,29 @@
+# Environment files (API keys, secrets)
+.env
+.env.local
+.env.*.local
+
+# Sensitive configuration
+*.key
+*.secret
+*.pem
+*.crt
+
+# Docker configs with credentials
+.docker/
+!docker-compose.yml
+
+# Temporary files
+*.tmp
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
