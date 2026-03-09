@@ -1,6 +1,6 @@
 # 📋 OpenClaw 配置状态
 
-**最后更新**: 2026-03-06T12:06:00+08:00
+**最后更新**: 2026-03-09T09:00:00+08:00
 
 ---
 
@@ -41,11 +41,17 @@
 - [x] 更新 `openclaw.json` 引用环境变量
 - [x] 添加 `.env` 到 `.gitignore`
 
+### 6. 财经日报自动化 (2026-03-09)
+- [x] 生成财经日报 (工作日 07:30)
+- [x] 质量检查 (≥80 分通过)
+- [x] Git 自动 commit + push (Obsidian 仓库)
+- [x] 飞书通知推送
+
 ---
 
 ## ⏳ 待完成配置
 
-### 1. 网络代理 (已完成 ✅)
+### 1. 网络代理 ✅ (已完成)
 ```bash
 # Mihomo 已配置并运行中
 # 代理端口：7890
@@ -85,7 +91,7 @@ curl -I https://github.com
 2. **用户操作**: 提供飞书 chatId (用于巡检推送)
 3. **Agent**: 下载剩余 skills (skill-creator, skill-vetter, ontology, sub-agent-manager)
 4. **Agent**: 注册夜间巡检 Cron
-5. **Agent**: 配置 Git 灾备仓库
+5. ~~Agent: 配置 Git 灾备仓库~~ ✅ 已完成 (Obsidian 子模组)
 
 ---
 
@@ -103,6 +109,15 @@ cd ~/.openclaw && sha256sum -c .config-baseline.sha256
 
 # 查看黄线日志
 cat memory/$(date +%Y-%m-%d).md
+
+# 财经日报测试
+./skills/financial-daily/financial-daily-cron.sh --force
+
+# 查看 Cron 任务
+crontab -l
+
+# Git 状态检查
+cd obsidian-repo && git status
 ```
 
 ---
