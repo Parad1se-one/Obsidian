@@ -2,75 +2,50 @@
 
 > 🦐 小虾：心跳时不只是报平安，还要做有意义的事。
 > 
-> **自动执行机制:** ✅ 已配置 cron，每小时自动检查并执行到期任务
+> **自动执行机制:** ✅ 已配置 cron
 > **手动触发:** 用户 heartbeat poll 时显示待执行任务状态
+> 
+> **最后更新**: 2026-03-10 - Cron 简化配置
 
 ---
 
-## 🤖 RL 研究学习 (每日核心任务)
+## 📋 Cron 定时任务 (2026-03-10 简化配置)
 
-### 上午心跳 (09:00) - RL 基础/算法
-- [ ] 运行 `./skills/rl-researcher/rl-study.sh basics 30`
-- [ ] 或 `./skills/rl-researcher/rl-study.sh algorithms 30`
-- [ ] 检查 knowledge/rl/study-log-$(date).md 是否生成
-- [ ] 确认 Git 提交成功
+### 📈 财经日报 (工作日 07:30)
+- **脚本**: `skills/financial-daily/financial-daily-cron.sh`
+- **推送**: 飞书消息 + Git 自动提交
+- **日志**: `logs/financial-daily-cron.log`
 
-### 下午心跳 (14:00) - 论文阅读
-- [ ] 运行 `./skills/rl-researcher/rl-study.sh paper 30`
-- [ ] 搜索并阅读 1 篇 RL 论文
-- [ ] 更新 knowledge/rl/papers/ 目录
-- [ ] 记录批判性思考
+### 🤖 RL 每日简报 (每天 09:00)
+- **脚本**: `skills/rl-researcher/rl-daily-brief.sh`
+- **推送**: 飞书消息 (研究方向 + 热点话题)
+- **日志**: `logs/rl-daily-brief.log`
 
-### 晚间心跳 (20:00) - 代码实现/实验
-- [ ] 运行 `./skills/rl-researcher/rl-study.sh code 60`
-- [ ] 实现/调试 RL 算法
-- [ ] 运行实验并记录结果
-- [ ] 更新 research/experiments/ 目录
+### 🔍 RL 探索学习 (每 2 小时，10:00-20:00)
+- **脚本**: `skills/rl-researcher/rl-exploration.sh`
+- **推送**: 每次执行都通知
+- **日志**: `logs/rl-exploration.log`
+- **输出**: `obsidian-repo/knowledge/rl/explorations/`
 
----
-
-## 📚 通用自学习 (轮换)
-
-### 财经学习
-- [ ] 运行 `./skills/self-learner/self-learner.sh finance 15`
-- [ ] 更新 knowledge/finance/learning-log-<date>.md
-
-### 技术学习
-- [ ] 运行 `./skills/self-learner/self-learner.sh tech 15`
-- [ ] 学习 AI/自动化工具新进展
-
-### 项目学习
-- [ ] 运行 `./skills/self-learner/self-learner.sh projects 10`
-- [ ] 检查 obsidian-repo 结构优化点
+### 📅 每日总结 (每天 23:59)
+- **脚本**: `skills/daily-summary/daily-summary.sh`
+- **推送**: 飞书消息 (当日任务统计 + 重要事件)
+- **日志**: `logs/daily-summary.log`
+- **输出**: `obsidian-repo/daily/summaries/`
 
 ---
 
-## 📈 财经日报 (工作日 07:30)
+## 🧹 系统维护
 
-- [ ] 运行 `./skills/financial-daily/financial-daily.sh`
-- [ ] 运行 `./skills/quality-checker/quality-checker.sh <输出文件> financial`
-- [ ] 质量评分 ≥80 分 → 推送给用户
-- [ ] 质量评分 <80 分 → 重新生成
+### 每日任务
+- **00:00** - Obsidian 日志生成
+- **04:00** - SearXNG 清理
 
----
+### 每周任务
+- **周日 03:00** - SearXNG 更新
 
-## 🧹 知识维护 (每周日)
-
-- [ ] 整理本周 RL 学习日志
-- [ ] 更新 knowledge/rl/RL-INDEX.md
-- [ ] 整理财经学习日志
-- [ ] 更新 knowledge/KNOWLEDGE-INDEX.md
-- [ ] 清理临时文件
-- [ ] Git 归档
-
----
-
-## 💡 主动检查 (2-4 次/天)
-
-- [ ] 有无紧急邮件/消息
-- [ ] 日历 upcoming events（24-48h）
-- [ ] 天气（如果用户可能外出）
-- [ ] GitHub 项目动态
+### 定期检查
+- **每 30 分钟** - SearXNG/Whoogle 健康检查
 
 ---
 

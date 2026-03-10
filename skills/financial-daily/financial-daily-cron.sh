@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKSPACE="/home/openclaw/.openclaw/workspace"
 LOG_FILE="$WORKSPACE/logs/financial-daily-cron.log"
 DATE="$(date +%Y-%m-%d)"
-OUTPUT_FILE="$WORKSPACE/obsidian-repo/daily/financial-news/${DATE}.md"
+OUTPUT_FILE="$WORKSPACE/obsidian-repo/10-Daily/财经日报/财经日报-${DATE}.md"
 
 # 创建日志目录
 mkdir -p "$(dirname "$LOG_FILE")"
