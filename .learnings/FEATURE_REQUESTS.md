@@ -1,5 +1,8 @@
-# Feature Requests
+# Feature Requests Log
 
-Log user-requested capabilities that don't currently exist.
+> 用户请求的新功能和能力
+> Skill: self-improving-agent
 
 ---
+
+(暂无)
