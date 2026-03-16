@@ -85,13 +85,17 @@ if [[ -f "${TEMP_DIR}/wallstreetcn_content.md" ]]; then
     fi
 fi
 
-# 6. 财经日历 (可选)
+# 6. 财经日历
 echo "---" >> "${OUTPUT_FILE}"
 echo "" >> "${OUTPUT_FILE}"
-echo "## 📅 财经日历" >> "${OUTPUT_FILE}"
-echo "" >> "${OUTPUT_FILE}"
-echo "*明日重点关注：*" >> "${OUTPUT_FILE}"
-echo "- [待补充]" >> "${OUTPUT_FILE}"
+if [[ -f "${TEMP_DIR}/finance_calendar_content.md" ]]; then
+    cat "${TEMP_DIR}/finance_calendar_content.md" >> "${OUTPUT_FILE}"
+else
+    echo "## 📅 财经日历" >> "${OUTPUT_FILE}"
+    echo "" >> "${OUTPUT_FILE}"
+    echo "*明日重点关注：*" >> "${OUTPUT_FILE}"
+    echo "- [待补充]" >> "${OUTPUT_FILE}"
+fi
 
 echo "✓ 日报生成完成：${OUTPUT_FILE}"
 exit 0

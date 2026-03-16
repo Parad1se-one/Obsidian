@@ -19,6 +19,7 @@ declare -a DATA_SOURCES=(
     "caijing-toutiao"
     "eastmoney"
     "wallstreetcn"
+    "finance-calendar"
 )
 
 # ==================== 初始化 ====================
