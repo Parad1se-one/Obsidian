@@ -36,33 +36,56 @@ fi
 
 # 2. 21 经济网
 if [[ -f "${TEMP_DIR}/21jingji_content.md" ]]; then
-    echo "## 📰 深度报道" >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
-    cat "${TEMP_DIR}/21jingji_content.md" | tail -n +3 >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
-    echo "---" >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
+    content=$(cat "${TEMP_DIR}/21jingji_content.md" | tail -n +3)
+    if [[ -n "${content}" && "${content}" != "## 📰 21 经济网 - 热门新闻" ]]; then
+        echo "## 📰 深度报道" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "${content}" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "---" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+    fi
 fi
 
 # 3. 财经头条
 if [[ -f "${TEMP_DIR}/caijing-toutiao_content.md" ]]; then
-    echo "## 📊 涨停复盘" >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
-    cat "${TEMP_DIR}/caijing-toutiao_content.md" | tail -n +3 >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
-    echo "---" >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
+    content=$(cat "${TEMP_DIR}/caijing-toutiao_content.md" | tail -n +3)
+    if [[ -n "${content}" && "${content}" != "## 📈 财经头条 - 焦点新闻" ]]; then
+        echo "## 📊 焦点新闻" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "${content}" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "---" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+    fi
 fi
 
 # 4. 东方财富
 if [[ -f "${TEMP_DIR}/eastmoney_content.md" ]]; then
-    echo "## 🔥 热门话题" >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
-    cat "${TEMP_DIR}/eastmoney_content.md" | tail -n +3 >> "${OUTPUT_FILE}"
-    echo "" >> "${OUTPUT_FILE}"
+    content=$(cat "${TEMP_DIR}/eastmoney_content.md" | tail -n +3)
+    if [[ -n "${content}" && "${content}" != "## 🔥 东方财富热门话题" ]]; then
+        echo "## 🔥 热门话题" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "${content}" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+    fi
 fi
 
-# 5. 财经日历 (可选)
+# 5. 华尔街见闻
+if [[ -f "${TEMP_DIR}/wallstreetcn_content.md" ]]; then
+    content=$(cat "${TEMP_DIR}/wallstreetcn_content.md" | tail -n +3)
+    if [[ -n "${content}" && "${content}" != "## 🌐 华尔街见闻" ]]; then
+        echo "" >> "${OUTPUT_FILE}"
+        echo "---" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "## 🌐 华尔街见闻" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+        echo "${content}" >> "${OUTPUT_FILE}"
+        echo "" >> "${OUTPUT_FILE}"
+    fi
+fi
+
+# 6. 财经日历 (可选)
 echo "---" >> "${OUTPUT_FILE}"
 echo "" >> "${OUTPUT_FILE}"
 echo "## 📅 财经日历" >> "${OUTPUT_FILE}"
