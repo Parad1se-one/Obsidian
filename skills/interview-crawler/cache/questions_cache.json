@@ -1,0 +1,166 @@
+{
+  "updated_at": "2026-03-18T15:38:45.659547",
+  "questions": [
+    {
+      "text": "请解释一下 Transformer 的 Self-Attention 机制",
+      "source": "牛客网 - LLM 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:35.146777",
+      "id": "6a98c08d242a"
+    },
+    {
+      "text": "LLM 的预训练和微调有什么区别？",
+      "source": "牛客网 - LLM 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:35.146809",
+      "id": "286edf78255e"
+    },
+    {
+      "text": "什么是 RLHF？请详细说明其流程",
+      "source": "牛客网 - LLM 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:35.146815",
+      "id": "c2833bac0365"
+    },
+    {
+      "text": "Transformer 中为什么使用 LayerNorm 而不是 BatchNorm？",
+      "source": "牛客网 - LLM 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:35.146819",
+      "id": "45ab0a8c4239"
+    },
+    {
+      "text": "LLM 推理时的显存占用主要来自哪些部分？",
+      "source": "牛客网 - LLM 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:35.146823",
+      "id": "58f66d3b7c0d"
+    },
+    {
+      "text": "大模型的显存优化有哪些方法？",
+      "source": "牛客网 - 大模型 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:36.456102",
+      "id": "725788afdcd1"
+    },
+    {
+      "text": "解释一下 LoRA 的原理和优势",
+      "source": "牛客网 - 大模型 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:36.456127",
+      "id": "9fa6937cdf9d"
+    },
+    {
+      "text": "什么是 Prompt Engineering？有哪些技巧？",
+      "source": "牛客网 - 大模型 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:36.456130",
+      "id": "92c74a8f2fee"
+    },
+    {
+      "text": "大模型分布式训练有哪些并行策略？",
+      "source": "牛客网 - 大模型 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:36.456132",
+      "id": "f8c21c9b4eee"
+    },
+    {
+      "text": "什么是 ZeRO 优化？",
+      "source": "牛客网 - 大模型 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:36.456134",
+      "id": "709d44f7b25e"
+    },
+    {
+      "text": "Agent 的核心组件有哪些？",
+      "source": "牛客网 - Agent 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:37.695676",
+      "id": "030130b86e22"
+    },
+    {
+      "text": "ReAct 框架的原理是什么？",
+      "source": "牛客网 - Agent 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:37.695702",
+      "id": "8551a79a649f"
+    },
+    {
+      "text": "如何设计 Agent 的记忆机制？",
+      "source": "牛客网 - Agent 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:37.695704",
+      "id": "8a77f170b440"
+    },
+    {
+      "text": "Agent 和 Workflow 有什么区别？",
+      "source": "牛客网 - Agent 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:37.695706",
+      "id": "83f1036da911"
+    },
+    {
+      "text": "如何避免 Agent 陷入循环调用？",
+      "source": "牛客网 - Agent 面试",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:37.695708",
+      "id": "213053dafa78"
+    },
+    {
+      "text": "解释一下 RoPE 位置编码的原理",
+      "source": "牛客网 - LLM 算法",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:38.883589",
+      "id": "cf1537e5c61f"
+    },
+    {
+      "text": "什么是 Flash Attention？优化原理是什么？",
+      "source": "牛客网 - LLM 算法",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:38.883619",
+      "id": "cbbbe29e2cf4"
+    },
+    {
+      "text": "LLM 的 tokenizer 有哪些常见方案？",
+      "source": "牛客网 - LLM 算法",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:38.883622",
+      "id": "f24158f97dc7"
+    },
+    {
+      "text": "什么是 MoE 架构？优缺点是什么？",
+      "source": "牛客网 - LLM 算法",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:38.883624",
+      "id": "6be101cb170f"
+    },
+    {
+      "text": "大模型训练数据如何清洗和处理？",
+      "source": "牛客网 - 大语言模型 面经",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:40.651680",
+      "id": "1861b40f69c5"
+    },
+    {
+      "text": "什么是 Instruction Tuning？",
+      "source": "牛客网 - 大语言模型 面经",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:40.651704",
+      "id": "b8944bf872af"
+    },
+    {
+      "text": "如何评估 LLM 的能力？",
+      "source": "牛客网 - 大语言模型 面经",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:40.651707",
+      "id": "0f903f9b17df"
+    },
+    {
+      "text": "大模型的幻觉问题如何解决？",
+      "source": "牛客网 - 大语言模型 面经",
+      "url": "https://www.nowcoder.com/search",
+      "crawl_time": "2026-03-18T15:38:40.651709",
+      "id": "0d9f0c69afb0"
+    }
+  ]
+}
