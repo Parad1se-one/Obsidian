@@ -1,7 +1,7 @@
 # Agent 面经 索引
 
-> 更新时间：2026-03-11
-> 共 4 个专题，32 道 Q&A
+> 更新时间：2026-03-18
+> 共 5 个专题，51 道 Q&A
 
 ---
 
@@ -13,6 +13,7 @@
 | [[Agent架构设计]] | 8 | ⭐⭐⭐ | 框架对比、RAG+Agent、MCP、安全 |
 | [[Agent工程实践]] | 8 | ⭐⭐⭐ | Prompt设计、上下文管理、部署、监控 |
 | [[Agent前沿话题]] | 8 | ⭐⭐⭐⭐ | Agentic RAG、Code Agent、World Model |
+| [[Agent高级系统设计]] | 19 | ⭐⭐⭐⭐⭐ | 记忆设计、上下文优化、工具路由、多Agent协作、性能优化 |
 
 ---
 
@@ -20,14 +21,14 @@
 
 1. AI Agent 和 Chatbot 的区别
 2. ReAct 框架原理
-3. Agent 的记忆机制
+3. Agent 的记忆机制 (短期/长期/元记忆)
 4. RAG + Agent 系统设计
 5. MCP 协议
 6. 多 Agent 协作架构
 7. Agent 安全性保障
-8. 上下文窗口管理
-9. Agent 评估方法
-10. Agent vs Workflow 选择
+8. 上下文窗口管理 (Attention Sink、滑动窗口)
+9. Agent 评估方法 (Planning vs Hallucination)
+10. 工具路由策略 (大规模工具召回与排序)
 
 ---
 
