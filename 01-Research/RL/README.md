@@ -1,12 +1,25 @@
 # RL Vault Structure
 
-当前只看这 4 个入口：
+当前按两条独立流水线来跑：
 
-- `Daily/`：日报
-- `Papers/`：论文卡片与长期资料
-- `DeepReads/`：值得继续深读的条目
-- `Archive/`：历史遗留目录，默认别翻
+## 1. DeepRead 生产线
+- 来源：arXiv + 高可信会议/期刊线索
+- 频率：每 2 小时一轮
+- 目标：挑值得精读的 RL 相关论文
+- 输出目录：`DeepReads/`
 
-说明：
-- 新生成内容统一写入 `Daily / Papers / DeepReads`
-- 旧的 `Highlights / Inbox / Deep-Reads / Daily/Morning` 等结构已移入 `Archive/`
+## 2. 日报生产线
+- 频率：每天早上 / 晚上各一次
+- 输入：扫描当天新增的 `DeepReads/`
+- 输出目录：`Daily/`
+
+## 目录说明
+- `DeepReads/`：自动精读产物池
+- `Daily/`：早报 / 晚报
+- `Papers/`：轻量论文卡片与长期资料
+- `Archive/`：历史遗留内容，默认不参与新工作流
+
+## 目前约定
+- 新的深读结果直接写入 `DeepReads/YYYY-MM/`
+- 当天摘要从 `DeepReads/` 抽取，不再经过 Inbox
+- 历史旧目录全部视为归档，不再作为主入口
