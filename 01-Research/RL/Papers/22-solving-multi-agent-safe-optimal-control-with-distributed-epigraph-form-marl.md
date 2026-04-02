@@ -2,9 +2,9 @@
 
 - arXiv: http://arxiv.org/abs/2504.15425
 - PDF: http://arxiv.org/pdf/2504.15425.pdf
-- 本地源 HTML: `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv.html]]`
-- 本地归档 PDF: `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html.pdf]]`
-- 本地全文: `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html-fulltext.md]]`
+- 本地源 HTML: `[[01-Research/RL/Sources/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv.html]]`
+- 本地归档 PDF: `[[01-Research/RL/Sources/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html.pdf]]`
+- 本地全文: `[[01-Research/RL/Sources/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html-fulltext.md]]`
 - Venue: RSS 2025
 - 发布时间: 2025-04-22
 - 分类: cs.RO, cs.AI, cs.LG, cs.MA, math.OC
