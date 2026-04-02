@@ -7,7 +7,7 @@
 **年份**: 2025  
 **领域标签**: #MARL #SafeRL #Robotics #Epigraph
 
-**证据说明**: 本次阅读基于 arXiv 摘要、arXiv HTML 正文、作者项目页与 OpenReview 摘要；PDF 因 49MB 下载超时未完整缓存，所以页码锚点我不乱写。
+**证据说明**: 本次阅读基于 arXiv 摘要、arXiv HTML 正文、作者项目页与 OpenReview 摘要；我已把原始 arXiv HTML、阅读版 PDF、以及本地全文 Markdown 一起归档到仓库，路径分别为 `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv.html]]`、`[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html.pdf]]`、`[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html-fulltext.md]]`。不是原始 arXiv PDF 排版，但全文内容已经进仓库。
 
 ---
 

@@ -2,13 +2,16 @@
 
 - arXiv: http://arxiv.org/abs/2504.15425
 - PDF: http://arxiv.org/pdf/2504.15425.pdf
+- 本地源 HTML: `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv.html]]`
+- 本地归档 PDF: `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html.pdf]]`
+- 本地全文: `[[01-Research/RL/Sources/2026-04/22-solving-multi-agent-safe-optimal-control-with-distributed-epigraph-form-marl-arxiv-html-fulltext.md]]`
 - Venue: RSS 2025
 - 发布时间: 2025-04-22
 - 分类: cs.RO, cs.AI, cs.LG, cs.MA, math.OC
 - 作者: Songyuan Zhang, Oswin So, Mitchell Black, Zachary Serlin, Chuchu Fan
 - 证据等级: 高
 - 证据来源: arXiv 摘要 + arXiv HTML 正文 + 项目页 + OpenReview 摘要
-- 本地 PDF: 下载超时，未完整缓存
+- 本地 PDF: 已使用 arXiv HTML 生成阅读版归档 PDF（非原始 arXiv 排版 PDF）
 - 项目页: https://mit-realm.github.io/def-marl/
 
 ---
